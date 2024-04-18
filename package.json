@@ -1,6 +1,6 @@
 {
   "name": "@maurosala/use-fingerprint",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Get canvas fingerprint and browser signature",
   "main": "use-fingerprint.js",
   "entry": "index.js",
