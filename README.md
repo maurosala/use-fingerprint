@@ -21,8 +21,12 @@ output:
 
 ```json
 {
-  "browser": "TW96aWxsYS81LjAgKGlQaG9uZTsgQ1BVIGlQaG9uZSBPUyAxNl82IGxpa2UgTWFjIE9TIFgpIEFwcGxlV2ViS2l0LzYwNS4xLjE1IChLSFRNTCwgbGlrZSBHZWNrbykgVmVyc2lvbi8xNi42IE1vYmlsZS8xNUUxNDggU2FmYXJpLzYwNC4xfGVuLUdCfDh8dHJ1ZXwzOTB8ODQ0fDI0fDM5MHw4NDR8W29iamVjdCBTY3JlZW5PcmllbnRhdGlvbl18MjQ=",
+  "browser": "dd5b420791fe9a7dc9ebd8deb648692f76d68b839b3d04cae30702f76c31bc14",
   "id": "B48D36C2",
   "ms": 20.4
 }
 ```
+
+- `browser`: browser signature
+- `id`: canvas fingerprint
+- `ms`: time in milliseconds to get the fingerprint

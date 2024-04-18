@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import jsSHA from 'jssha'
 
 import init, { fingerprint } from './pkg/fingerprint'
 
@@ -28,7 +29,9 @@ export default function useFingerprint() {
       .filter((x) => x)
       .join('|')
 
-    return btoa(browserFingerprint)
+    return new jsSHA('SHA-256', 'TEXT', { encoding: 'UTF8' })
+      .update(browserFingerprint)
+      .getHash('HEX')
   }
 
   useEffect(() => {
