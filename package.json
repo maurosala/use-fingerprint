@@ -1,9 +1,10 @@
 {
   "name": "@maurosala/use-fingerprint",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Get canvas fingerprint and browser signature",
   "main": "use-fingerprint.js",
   "entry": "index.js",
+  "git_repository": "https://github.com/maurosala/use-fingerprint",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

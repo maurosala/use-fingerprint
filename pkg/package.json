@@ -1,0 +1,14 @@
+{
+  "name": "fingerprint",
+  "version": "0.1.0",
+  "files": [
+    "fingerprint_bg.wasm",
+    "fingerprint.js",
+    "fingerprint.d.ts"
+  ],
+  "module": "fingerprint.js",
+  "types": "fingerprint.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
