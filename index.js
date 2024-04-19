@@ -6,6 +6,7 @@ import init, { fingerprint } from './pkg/fingerprint'
 export default function useFingerprint() {
   const [f, setF] = useState({
     id: null,
+    browser: null,
     ms: null
   })
 
