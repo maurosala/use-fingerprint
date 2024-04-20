@@ -13,7 +13,8 @@
   "license": "MIT",
   "homepage": "https://github.com/maurosala/use-fingerprint",
   "dependencies": {
-    "jssha": "^3.3.1"
+    "jssha": "^3.3.1",
+    "remove": "^0.1.5"
   },
   "tags": [
     "fingerprint",

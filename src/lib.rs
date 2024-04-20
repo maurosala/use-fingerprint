@@ -1,8 +1,33 @@
-use crc::{crc32, Hasher32};
 use wasm_bindgen::prelude::*;
+use sha2::{Digest, Sha256};
+use web_sys;
 
 #[wasm_bindgen]
 pub fn fingerprint() -> Result<String, JsValue> {
+    let window = web_sys::window().expect("should have a window in this context");
+    let performance = window
+        .performance()
+        .expect("performance should be available");
+
+    let _start = performance.now();
+
+    let canvas = canvas()?;
+    let browser = browser()?;
+
+
+    let _end = performance.now();
+
+    let payload = format!(
+        "{{\"ms\": {:.2}, \"fingerprint\": \"{}\", \"browser\": \"{}\" }}",
+        _end - _start,
+        canvas,
+        browser
+    );
+
+    Ok(payload)
+}
+
+fn canvas() -> Result<String, JsValue> {
     let window = web_sys::window().expect("should have a window in this context");
     let document = web_sys::window().unwrap().document().unwrap();
     let performance = window
@@ -30,17 +55,36 @@ pub fn fingerprint() -> Result<String, JsValue> {
     context.fill_text("❤️🤪🎉👋", 50.0, 70.0).unwrap();
     context.stroke();
 
-    let daturl = canvas.to_data_url().unwrap();
-    let mut digest = crc32::Digest::new_with_initial(crc32::IEEE, 0u32);
-    digest.write(&daturl.as_bytes());
+    Ok(format!("{:x}", Sha256::digest(canvas.to_data_url().unwrap().as_str())))
+}
 
-    let _end = performance.now();
+fn browser() -> Result<String, JsValue> {
+    let window = web_sys::window().expect("should have a window in this context");
+    
+    let navigator = window.navigator();
+    let screen = window.screen().unwrap();
 
-    let payload = format!(
-        "{{\"ms\": {:.2}, \"id\": \"{:X}\" }}",
-        _end - _start,
-        digest.sum32(),
-    );
+    let user_agent = navigator.user_agent().unwrap();
+    let language = navigator.language().unwrap();
+    let platform = navigator.platform().unwrap();
+    let max_touch_points = navigator.max_touch_points();
+    let hardware_concurrency = navigator.hardware_concurrency();
+    let app_name = navigator.app_name();
+    let product = navigator.product();
+    let app_code_name = navigator.app_code_name().unwrap();
+    let app_version = navigator.app_version().unwrap();
+    let on_line = navigator.on_line();
+    // let incognito = navigator.cookie_enabled();
+    
+    let color_depth = screen.color_depth().unwrap();
+    let height = screen.height().unwrap();
+    let width = screen.width().unwrap();
+    let pixel_depth = screen.pixel_depth().unwrap();
+    
+    let fields = format!("{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}", 
+    user_agent, language, max_touch_points, hardware_concurrency, app_name, platform, product, app_code_name, app_version, on_line, color_depth, height, width, pixel_depth); 
 
-    Ok(payload)
+
+    // Ok(format!("{}", incognito))
+    Ok(format!("{:x}", Sha256::digest(fields)))
 }
