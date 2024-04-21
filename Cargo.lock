@@ -72,6 +72,7 @@ dependencies = [
 name = "fingerprint"
 version = "0.1.0"
 dependencies = [
+ "js-sys",
  "sha2",
  "wasm-bindgen",
  "wasm-bindgen-futures 0.4.42",
